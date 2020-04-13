@@ -1,15 +1,30 @@
 fileFormatVersion: 2
-guid: 3d600d87cc714d545bce654c44d6f387
+guid: e2ffe73dc3d834b3d93837ee0b362ace
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Helix_spin
+    100004: spin
+    100006: Subdivision_Surface
+    100008: Subdivision_Surface_2
+    100010: Sweep
+    100012: Sweep_2
+    100014: Sweep_3
     400000: //RootNode
-    2100000: Mat.1
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Extrude
-    2186277476908879412: ImportLogs
+    400002: Helix_spin
+    400004: spin
+    400006: Subdivision_Surface
+    400008: Subdivision_Surface_2
+    400010: Sweep
+    400012: Sweep_2
+    400014: Sweep_3
+    2100000: helix-shine
+    2300000: Sweep_3
+    3300000: Sweep_3
+    4300000: Sweep_3
+    7400000: helix animation
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -37,7 +52,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: helix animation
+      takeName: CINEMA_4D_Main
+      firstFrame: 0
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -62,8 +105,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -90,7 +133,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
