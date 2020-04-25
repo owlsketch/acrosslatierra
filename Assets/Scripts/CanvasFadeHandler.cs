@@ -8,6 +8,7 @@ public class CanvasFadeHandler : MonoBehaviour
 
     public void FadeIn()
     {
+        gameObject.SetActive(true);
         var canvGroup = GetComponent<CanvasGroup>();
         StartCoroutine(ExecuteFade(canvGroup, canvGroup.alpha, 1));
     }
@@ -29,6 +30,11 @@ public class CanvasFadeHandler : MonoBehaviour
             group.alpha = Mathf.Lerp(start, end, timeElapsed / duration);
 
             yield return null;
+        }
+           
+        if (group.alpha < 0.01)
+        {
+            gameObject.SetActive(false);
         }
 
     }
