@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIHandler : MonoBehaviour
+public class TutorialUIHandler : MonoBehaviour
 {
     public Transform playerCamera;
-    public float fadeDuration = 0.4f;
-    public int delay = 0;
+    public int delay = 1;
+    public float duration = 0.5f;
 
     // UI will always be pointing towards the user
     void Start() => transform.rotation = Quaternion.LookRotation(transform.position - playerCamera.position);
@@ -16,14 +16,14 @@ public class UIHandler : MonoBehaviour
     public void FadeIn()
     {
         gameObject.SetActive(true);
-        StartCoroutine(Delay());
+        updatePosition();
+
+        CanvasGroup canvGroup = gameObject.GetComponent<CanvasGroup>();
+        LeanTween.alphaCanvas(canvGroup, 1f, duration).setEase(LeanTweenType.easeInQuad).setDelay(delay);
     }
-       
 
-    IEnumerator Delay ()
+    private void updatePosition()
     {
-        yield return new WaitForSeconds(delay);
-
         Vector3 playerPos = playerCamera.position;
         Vector3 playerDirection = playerCamera.forward;
         Quaternion playerRotation = playerCamera.rotation;
@@ -33,34 +33,12 @@ public class UIHandler : MonoBehaviour
         newPos.Set(newPos.x, 1.0f, newPos.z);
 
         gameObject.transform.SetPositionAndRotation(newPos, playerRotation);
-
-        var canvGroup = GetComponent<CanvasGroup>();
-        StartCoroutine(ExecuteFade(canvGroup, canvGroup.alpha, 1)); 
     }
 
     public void FadeOut()
     {
         var canvGroup = GetComponent<CanvasGroup>();
-        StartCoroutine(ExecuteFade(canvGroup, canvGroup.alpha, 0));
+        LeanTween.alphaCanvas(canvGroup, 0f, duration).setEase(LeanTweenType.easeInQuad).setDelay(delay);
+        gameObject.SetActive(false);
     }
-
-    public IEnumerator ExecuteFade(CanvasGroup group, float start, float end)
-    {
-        float timeElapsed = 0f;
-
-        while (timeElapsed < fadeDuration)
-        {
-            timeElapsed += Time.deltaTime;
-            group.alpha = Mathf.Lerp(start, end, timeElapsed / fadeDuration);
-
-            yield return null;
-        }
-           
-        if (group.alpha < 0.01)
-        {
-            gameObject.SetActive(false);
-        }
-
-    }
-
 }
