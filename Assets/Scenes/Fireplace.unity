@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9285dd7b38488f44b00e4594ce293b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 2121007794}
   delay: 1
   duration: 0.5
 --- !u!225 &18919617
@@ -2370,7 +2370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9285dd7b38488f44b00e4594ce293b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 2121007794}
   delay: 1
   duration: 0.5
 --- !u!225 &320247869
@@ -3807,11 +3807,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601024213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -65, z: -192.6329}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1626282912}
   - {fileID: 817338228}
+  - {fileID: 1626282912}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4831,7 +4831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9285dd7b38488f44b00e4594ce293b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 2121007794}
   delay: 1
   duration: 0.5
 --- !u!225 &712514836
@@ -10450,7 +10450,7 @@ Transform:
   - {fileID: 320247867}
   - {fileID: 18919615}
   m_Father: {fileID: 601024214}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &858835236
 PrefabInstance:
@@ -16555,6 +16555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1198530760}
+  - component: {fileID: 1198530761}
   - component: {fileID: 1198530759}
   m_Layer: 0
   m_Name: GameManager
@@ -16589,6 +16590,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1198530761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198530758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479be29848c581640986853b76251ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialUI: {fileID: 712514835}
 --- !u!1 &1198788297
 GameObject:
   m_ObjectHideFlags: 0
@@ -22642,17 +22656,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 712514835}
         m_MethodName: FadeIn
         m_Mode: 1
@@ -24188,7 +24191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1626282912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24203,7 +24206,7 @@ RectTransform:
   - {fileID: 1240061436}
   - {fileID: 1569602130}
   m_Father: {fileID: 601024214}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -35195,6 +35198,12 @@ MonoBehaviour:
   leftControllerVelocityTracker: {fileID: 2121007788}
   rightController: {fileID: 2121007781}
   rightControllerVelocityTracker: {fileID: 2121007787}
+--- !u!4 &2121007794 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 126d619cf4daa52469682f85c1378b4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121007779}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2137824938
 GameObject:
   m_ObjectHideFlags: 0
