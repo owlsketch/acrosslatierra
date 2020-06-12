@@ -16316,6 +16316,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2032915494}
+        m_MethodName: FadeIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -23068,7 +23079,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gather firewood inside the stone circle ....
+  m_text: Gather firewood inside the stone circle...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -35513,6 +35524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06287e101a7c024185227cd4d1c239f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackedGameObject: {fileID: 0}
+  relativeTo: {fileID: 0}
 --- !u!114 &2121007788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35525,6 +35538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06287e101a7c024185227cd4d1c239f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackedGameObject: {fileID: 0}
+  relativeTo: {fileID: 0}
 --- !u!114 &2121007789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35537,6 +35552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06287e101a7c024185227cd4d1c239f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackedGameObject: {fileID: 0}
+  relativeTo: {fileID: 0}
 --- !u!114 &2121007790
 MonoBehaviour:
   m_ObjectHideFlags: 0

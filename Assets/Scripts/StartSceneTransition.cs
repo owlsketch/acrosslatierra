@@ -5,13 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class StartSceneTransition : MonoBehaviour
 {
-    public int waitTime = 3;
+    public int minWaitTime = 3;
 
     void Start() => StartCoroutine(LoadFireplace());
 
     IEnumerator LoadFireplace()
     {
-        yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene("Fireplace");
+        yield return new WaitForSeconds(minWaitTime);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Fireplace");
+        while(!asyncLoad.isDone) { yield return null; }
     }
 }
