@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fireplace.unity
     guid: 4a44424e3f9743a47ad9e3f25acfe5f0
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 41f7768c39c120542b010457b9cba302,
+      type: 2}
