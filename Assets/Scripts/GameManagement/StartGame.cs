@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class StartGame : MonoBehaviour
 {
-    public TutorialUIHandler initialUI;
+    public TutorialPanelHandler initialUI;
     void Start() => initialUI.FadeIn();
 }

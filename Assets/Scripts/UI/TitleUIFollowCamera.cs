@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIFollowCamera : MonoBehaviour
+public class TitleUIFollowCamera : MonoBehaviour
 {
     public Transform playerCamera;
     public float distance = 10;
