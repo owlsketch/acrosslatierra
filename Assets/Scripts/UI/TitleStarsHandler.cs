@@ -6,7 +6,7 @@ public class TitleStarsHandler : MonoBehaviour
     public float spawnRange = 2.5f;
     public float duration = 2.5f;
 
-    void Start()
+    void onEnable()
     {
         foreach (Transform child in transform)
         {
