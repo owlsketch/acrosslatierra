@@ -8,6 +8,7 @@ TagManager:
   - Controls
   - Timeline
   - Firewood
+  - Trigger
   layers:
   - Default
   - TransparentFX
