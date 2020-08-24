@@ -8,12 +8,14 @@ public class HandCollider : MonoBehaviour
 
     private GameObject spawnedSparks;
     private int count = 0;
+    private bool coroutineRunning = false;
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Controls"))
         {
             count++;
+            if (!coroutineRunning) StartCoroutine(WaitAndReset());
 
             if (count > 5)
             {
@@ -22,5 +24,14 @@ public class HandCollider : MonoBehaviour
                 spawnedSparks.GetComponent<ParticleSystem>().Play();
             }
         }
+    }
+
+    IEnumerator WaitAndReset()
+    {
+        coroutineRunning = true;
+        yield return new WaitForSeconds(4);
+
+        count = 0;
+        coroutineRunning = false;
     }
 }

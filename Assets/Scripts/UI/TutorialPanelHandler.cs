@@ -20,7 +20,7 @@ public class TutorialPanelHandler : MonoBehaviour
     void Start() {
         transform.rotation = Quaternion.LookRotation(transform.position - playerCamera.position);
         
-        yDifference = gameObject.transform.position.y - playerCamera.position.y;
+        yDifference = .3125f;
         if (follow) prevPosition = playerCamera.position;
     }
     

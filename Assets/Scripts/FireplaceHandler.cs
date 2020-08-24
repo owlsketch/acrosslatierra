@@ -6,6 +6,7 @@ public class FireplaceHandler : MonoBehaviour
 {
     public GameObject firePS;
     public GameObject title;
+    public GameObject mask;
 
     //make a list to track collided objects
     private List<Collider> collidedObjects = new List<Collider>();
@@ -15,8 +16,14 @@ public class FireplaceHandler : MonoBehaviour
     {
         if (trigger)
         {
-            if (firePS.activeInHierarchy == false) firePS.SetActive(true);
+            if (firePS.activeInHierarchy == false)
+            {
+                firePS.SetActive(true);
+                firePS.GetComponent<ParticleSystem>().Play();
+            }
+
             if (title.activeInHierarchy == false) title.SetActive(true);
+            if (mask.activeInHierarchy == false) mask.SetActive(true);
         }
 
         // Everyframe we have a check on how many objects are actively colliding
