@@ -50,7 +50,7 @@ public class ContinuousMovement : MonoBehaviour
 
     void CapsuleFollowHeadset()
     {
-        // .2m fo yo big ass forehead
+        // .2m for forehead
         character.height = rig.cameraInRigSpaceHeight + 0.2f;
 
         // transform camera pos from world space to local space
