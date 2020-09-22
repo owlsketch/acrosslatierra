@@ -40,9 +40,8 @@ public class CustomContinuousMovement : MonoBehaviour
         // Movement relative to the local forward direction of the camera
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.localEulerAngles.y, 0);
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
-       
-        transform.Translate(direction * Time.fixedDeltaTime * speed);
-        
+       transform.Translate(direction * Time.fixedDeltaTime * speed);
+
         // v(t) = 0 if grounded, else v(t) = v0 + at.
         bool isGrounded = DetermineIfGrounded();
         if (isGrounded)
@@ -52,39 +51,43 @@ public class CustomContinuousMovement : MonoBehaviour
 
         // since up is a vector in world space, gravity needs to be applied in world space
         transform.Translate(rig.transform.up * fallingSpeed * Time.fixedDeltaTime, Space.World);
-
+        
         MaintainAboveGround();
     }
-    
-    // TODO: Does this even still apply? Regardless, solution without is good enough for now.
-    // void CapsuleFollowHeadset() {} 
 
     bool DetermineIfGrounded()
     {
-        // ray starts at camera position + .125 to account for radius of sphere cast
-        Vector3 rayStart = transform.TransformPoint(rig.cameraInRigSpacePos) + Quaternion.Euler(rig.transform.up) * new Vector3(0, 0.125f, 0);
-        
+        Vector3 rayStart = transform.TransformPoint(rig.cameraInRigSpacePos);
+        float rayLength = rig.cameraInRigSpaceHeight;
+
         // the length should really be the height of the character, but if ray is too short, collisions aren't detected, so minimum set
         // likewise we choose .375 because if the user is falling from a very high height, the acceleration may cause the collision to be missed
-        float rayLength = rig.cameraInRigSpaceHeight;
-        if (rayLength < .375f) { rayLength = .375f; }
+        if (rayLength < .375f) {
+            rayStart = transform.position + rig.transform.up * .375f;
+            rayLength = .375f;
+        }
+        
+        bool hasHit = Physics.Raycast(rayStart, -rig.transform.up, out RaycastHit hitInfo, rayLength, groundLayer);
+        Debug.DrawRay(rayStart, -rig.transform.up * .375f, Color.magenta);
+        
 
-        bool hasHit = Physics.SphereCast(rayStart, .25f, -rig.transform.up, out RaycastHit hitInfo, rayLength, groundLayer);
         return hasHit;
     }
 
-    void MaintainAboveGround()
+    bool MaintainAboveGround()
     {
-        Vector3 rayStart = transform.position;
-        float rayLength = .1f;
+        Vector3 rayStart = transform.position + rig.transform.up * .375f;
+        float rayLength = .375f;
 
         bool hasHit = Physics.Raycast(rayStart, -rig.transform.up, out RaycastHit hitInfo, rayLength, groundLayer);
-        
-        if (hitInfo.distance != 0 && hitInfo.distance < 0.1f)
+
+        if (hitInfo.distance != 0 && hitInfo.distance < 0.35f)
         {
-            //as the player moves around the curve, the sphere cast slowly sinks, so need to manually push the rig up as well if it sinks too much
-            float yDisplacement = 0.1f - hitInfo.distance;
-            transform.Translate(new Vector3(0, yDisplacement, 0));
+            //as the player moves around the curve, the raycast slowly sinks, so need to manually push the rig up as well if it sinks too much
+            float yDisplacement = 0.35f - hitInfo.distance;
+            transform.Translate(rig.transform.up * yDisplacement, Space.World);
         }
+
+        return hasHit;
     }
 }
