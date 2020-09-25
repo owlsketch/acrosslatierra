@@ -10,6 +10,7 @@ public class SceneTransition : MonoBehaviour
     IEnumerator LoadSpecifiedScene(string sceneName)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        while(!asyncLoad.isDone) { yield return null; }
+        yield return new WaitForSeconds(1);
+        while (!asyncLoad.isDone) { yield return null; }
     }
 }
