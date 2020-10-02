@@ -76,15 +76,15 @@ public class CustomContinuousMovement : MonoBehaviour
 
     bool MaintainAboveGround()
     {
-        Vector3 rayStart = transform.position + rig.transform.up * .375f;
-        float rayLength = .375f;
+        Vector3 rayStart = transform.position + rig.transform.up * 1f;
+        float rayLength = 1f;
 
         bool hasHit = Physics.Raycast(rayStart, -rig.transform.up, out RaycastHit hitInfo, rayLength, groundLayer);
 
-        if (hitInfo.distance != 0 && hitInfo.distance < 0.35f)
+        if (hitInfo.distance != 0 && hitInfo.distance < 0.975f)
         {
             //as the player moves around the curve, the raycast slowly sinks, so need to manually push the rig up as well if it sinks too much
-            float yDisplacement = 0.35f - hitInfo.distance;
+            float yDisplacement = 0.975f - hitInfo.distance;
             transform.Translate(rig.transform.up * yDisplacement, Space.World);
         }
 

@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class FireplaceHandler : MonoBehaviour
 {
+    public Canvas UIPopUp;
     public GameObject firePS;
     public GameObject title;
     public GameObject mask;
 
+
     //make a list to track collided objects
     private List<Collider> collidedObjects = new List<Collider>();
+    private bool UITriggered = false;
     private bool trigger = false;
 
     void Update()
     {
-        if (trigger)
+        // need to ensure fireplace is active
+        if (trigger && gameObject.activeInHierarchy)
         {
+            TutorialPanelHandler UIScript = UIPopUp.GetComponent<TutorialPanelHandler>();
+            UIScript.FadeOut();
+
             if (firePS.activeInHierarchy == false)
             {
                 firePS.SetActive(true);
@@ -24,6 +31,8 @@ public class FireplaceHandler : MonoBehaviour
 
             if (title.activeInHierarchy == false) title.SetActive(true);
             if (mask.activeInHierarchy == false) mask.SetActive(true);
+
+            trigger = false;
         }
 
         // Everyframe we have a check on how many objects are actively colliding
@@ -44,6 +53,13 @@ public class FireplaceHandler : MonoBehaviour
     {
         if (collidedObjects.Count >= 3)
         {
+            // activate UI for hand rubbing
+            if (!UITriggered)
+            {
+                TutorialPanelHandler UIScript = UIPopUp.GetComponent<TutorialPanelHandler>();
+                UIScript.FadeIn();
+                UITriggered = true;
+            }
             if (col.CompareTag("Trigger"))
             {
                 trigger = true;

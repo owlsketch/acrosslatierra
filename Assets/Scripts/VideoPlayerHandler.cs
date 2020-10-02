@@ -6,7 +6,8 @@ public class VideoPlayerHandler : MonoBehaviour
 {
     public Material videoMaterial;
     public GameObject scene;
-    public Terrain terrain;
+    // miscObjects reffers to items that dont have a meshRender, and need to be disabled instead of hidden
+    public GameObject[] noninteractiveObjects;
 
     private Component[] meshRenderers;
     private UnityEngine.Video.VideoPlayer videoPlayer;
@@ -43,7 +44,16 @@ public class VideoPlayerHandler : MonoBehaviour
                 }
             }
 
-            if (terrain) { terrain.enabled = false; }
+            foreach (GameObject item in noninteractiveObjects) {
+                if (item.activeInHierarchy == true)
+                {
+                    item.SetActive(false);
+                    if (item.TryGetComponent<ParticleSystem>(out ParticleSystem PS))
+                    {
+                        PS.Stop();
+                    }
+                }
+            }
 
             // once ready, then update everything
             RenderSettings.skybox = videoMaterial;
@@ -68,8 +78,18 @@ public class VideoPlayerHandler : MonoBehaviour
                 renderer.enabled = true;
             }
         }
-        
-        if (terrain) { terrain.enabled = false; }
+
+        foreach (GameObject item in noninteractiveObjects)
+        {
+            if (item.activeInHierarchy == false)
+            {
+                item.SetActive(true);
+                if (item.TryGetComponent<ParticleSystem>(out ParticleSystem PS))
+                {
+                    PS.Play();
+                }
+            }
+        }
 
         // stop video, return everything to previous state
         RenderSettings.skybox = defaultSkybox;
