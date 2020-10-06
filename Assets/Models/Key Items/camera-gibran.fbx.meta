@@ -1,28 +1,18 @@
 fileFormatVersion: 2
-guid: 273d3dcb3c4d849beac3710118f73a97
+guid: 0093aa9cbced740e19aee023de32d83c
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Material
+      type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: FrameMatMaterial
-    second: {fileID: 2100000, guid: f593788ff71124a0f8be9eb44f9067f0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FrameMaterial
-    second: {fileID: 2100000, guid: 260eef49e0b4741c49e2c791397acc90, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PhotographMaterial
-    second: {fileID: 2100000, guid: 14d9eb67bd7cc42be825f09dfa5ea07f, type: 2}
+      name: camera-txt_1
+    second: {fileID: 2800000, guid: 0e1c667fdf359458eb29c645460054b2, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

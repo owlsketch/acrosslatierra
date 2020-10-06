@@ -1,28 +1,18 @@
 fileFormatVersion: 2
-guid: 273d3dcb3c4d849beac3710118f73a97
+guid: 0189064c3004e4c2ca9f2449d593fb52
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Material
+      type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: FrameMatMaterial
-    second: {fileID: 2100000, guid: f593788ff71124a0f8be9eb44f9067f0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FrameMaterial
-    second: {fileID: 2100000, guid: 260eef49e0b4741c49e2c791397acc90, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PhotographMaterial
-    second: {fileID: 2100000, guid: 14d9eb67bd7cc42be825f09dfa5ea07f, type: 2}
+      name: abuelita-txt
+    second: {fileID: 2800000, guid: 77d0a1a0c13c94ac1989b1ac18cc3370, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -58,12 +48,12 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    swapUVChannels: 0
+    swapUVChannels: 1
     generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
