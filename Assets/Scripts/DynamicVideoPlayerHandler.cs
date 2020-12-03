@@ -2,23 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VideoPlayerHandler : MonoBehaviour
+public class DynamicVideoPlayerHandler : MonoBehaviour
 {
+    public UnityEngine.Video.VideoClip videoClip;
+    public RenderTexture renderTexture;
     public Material videoMaterial;
     public GameObject scene;
-    // miscObjects reffers to items that dont have a meshRender, and need to be disabled instead of hidden
-    public GameObject[] noninteractiveObjects;
+    public GameObject[] noninteractiveObjects; // items without a meshRender need to be disabled instead of hidden
 
-    private Component[] meshRenderers;
-    private UnityEngine.Video.VideoPlayer videoPlayer;
     private Material defaultSkybox;
+    private UnityEngine.Video.VideoPlayer videoPlayer;
     private Coroutine co;
+    private Component[] meshRenderers;
+
 
     public void InitiateVideo(int delayTime)
     {
-        // why not dynamically create and destroy video player?
-        videoPlayer = gameObject.GetComponent<UnityEngine.Video.VideoPlayer>();
         defaultSkybox = RenderSettings.skybox;
+
+        videoPlayer = gameObject.AddComponent<UnityEngine.Video.VideoPlayer>();
+        videoPlayer.clip = videoClip;
+
+        videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
+        videoPlayer.targetTexture = renderTexture;
+
+        videoPlayer.playOnAwake = false;
+        videoPlayer.waitForFirstFrame = true;
+        videoPlayer.isLooping = true;
        
         if (co != null) { StopCoroutine(co); }
         co = StartCoroutine(StartVideoCoroutine(delayTime));
@@ -93,7 +103,9 @@ public class VideoPlayerHandler : MonoBehaviour
         }
 
         // stop video, return everything to previous state
-        RenderSettings.skybox = defaultSkybox;
         videoPlayer.Stop();
+        Destroy(gameObject.GetComponent<UnityEngine.Video.VideoPlayer>());
+
+        RenderSettings.skybox = defaultSkybox;
     }
 }
