@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Character movement when gravity isn't uniform
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
@@ -14,6 +16,7 @@ public class CustomContinuousMovement : MonoBehaviour
     private Vector2 inputAxis;
     private Vector3 upAxis;
     private float fallingSpeed;
+    private bool movementAllowed = true;
 
 
     void Start()
@@ -25,6 +28,8 @@ public class CustomContinuousMovement : MonoBehaviour
         rig.MatchRigUp(upAxis);
     }
 
+    public void ToggleMovement() => movementAllowed = !movementAllowed;
+
     void Update()
     {
         InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
@@ -33,14 +38,19 @@ public class CustomContinuousMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // get orientation and normalize
         upAxis = (new Vector3(0, 0, 0) - rig.transform.position).normalized;
+        // remove z axis from direction vector
         upAxis = new Vector3(upAxis.x, upAxis.y, 0);
         rig.MatchRigUp(upAxis);
 
         // Movement relative to the local forward direction of the camera
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.localEulerAngles.y, 0);
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
-       transform.Translate(direction * Time.fixedDeltaTime * speed);
+        if (movementAllowed)
+        {
+            transform.Translate(direction * Time.fixedDeltaTime * speed);
+        }
 
         // v(t) = 0 if grounded, else v(t) = v0 + at.
         bool isGrounded = DetermineIfGrounded();

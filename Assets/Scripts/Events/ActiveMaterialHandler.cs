@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Swaps the material an object currently displays
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

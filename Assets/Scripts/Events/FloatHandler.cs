@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MaskHandler : MonoBehaviour
+public class FloatHandler : MonoBehaviour
 {
     public bool canFloat = true;
     public float degreesPerSec = 15.0f;

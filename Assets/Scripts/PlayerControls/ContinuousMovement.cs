@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Character movement for uniform gravity
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;

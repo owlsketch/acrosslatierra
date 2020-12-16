@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866930}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: b_button_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5004299891577866917}
   - component: {fileID: 5004299891577866924}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: controller_ply
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866914}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: controller_world
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866938}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: b_button_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866941}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: b_trigger_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866943}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Oculus Touch Controller - Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866936}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: b_trigger_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866912}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: b_thumbstick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004299891577866918}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: b_button_oculus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,34 +1,27 @@
-﻿using System.Collections;
+﻿// TODO: Delete this script once DynamicVideoPlayerHandler.cs 
+// proven to work and fix memory issue and video swapping issue
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DynamicVideoPlayerHandler : MonoBehaviour
+public class VideoPlayerHandler : MonoBehaviour
 {
-    public UnityEngine.Video.VideoClip videoClip;
-    public RenderTexture renderTexture;
     public Material videoMaterial;
     public GameObject scene;
-    public GameObject[] noninteractiveObjects; // items without a meshRender need to be disabled instead of hidden
+    // miscObjects reffers to items that dont have a meshRender, and need to be disabled instead of hidden
+    public GameObject[] noninteractiveObjects;
 
-    private Material defaultSkybox;
-    private UnityEngine.Video.VideoPlayer videoPlayer;
-    private Coroutine co;
     private Component[] meshRenderers;
-
+    private UnityEngine.Video.VideoPlayer videoPlayer;
+    private Material defaultSkybox;
+    private Coroutine co;
 
     public void InitiateVideo(int delayTime)
     {
+        // why not dynamically create and destroy video player?
+        videoPlayer = gameObject.GetComponent<UnityEngine.Video.VideoPlayer>();
         defaultSkybox = RenderSettings.skybox;
-
-        videoPlayer = gameObject.AddComponent<UnityEngine.Video.VideoPlayer>();
-        videoPlayer.clip = videoClip;
-
-        videoPlayer.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
-        videoPlayer.targetTexture = renderTexture;
-
-        videoPlayer.playOnAwake = false;
-        videoPlayer.waitForFirstFrame = true;
-        videoPlayer.isLooping = true;
        
         if (co != null) { StopCoroutine(co); }
         co = StartCoroutine(StartVideoCoroutine(delayTime));
@@ -103,9 +96,7 @@ public class DynamicVideoPlayerHandler : MonoBehaviour
         }
 
         // stop video, return everything to previous state
-        videoPlayer.Stop();
-        Destroy(gameObject.GetComponent<UnityEngine.Video.VideoPlayer>());
-
         RenderSettings.skybox = defaultSkybox;
+        videoPlayer.Stop();
     }
 }
