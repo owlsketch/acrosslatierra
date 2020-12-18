@@ -23,12 +23,15 @@ public class CustomContinuousMovement : MonoBehaviour
     {
         rig = GetComponent<XRRig>();
 
+        // Vector *pointing* towards origin. We remove the z axis because we
+        // don't want to be pushed from the origin in the z axis, only in x/y.
         upAxis = (new Vector3(0, 0, 0) - rig.transform.position).normalized;
         upAxis = new Vector3(upAxis.x, upAxis.y, 0);
+
         rig.MatchRigUp(upAxis);
     }
 
-    public void ToggleMovement() => movementAllowed = !movementAllowed;
+    public void AllowMovement(bool state) => movementAllowed = state;
 
     void Update()
     {
@@ -38,9 +41,7 @@ public class CustomContinuousMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // get orientation and normalize
         upAxis = (new Vector3(0, 0, 0) - rig.transform.position).normalized;
-        // remove z axis from direction vector
         upAxis = new Vector3(upAxis.x, upAxis.y, 0);
         rig.MatchRigUp(upAxis);
 
