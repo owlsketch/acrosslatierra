@@ -45,8 +45,6 @@ public class FireplaceHandler : MonoBehaviour
         {
             collidedObjects.Add(col);
         }
-
-
     }
 
     private void OnTriggerEnter(Collider col)

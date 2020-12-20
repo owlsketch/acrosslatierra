@@ -11,7 +11,7 @@ public class CustomContinuousMovement : MonoBehaviour
     public XRNode inputSource;
     public float speed = 1.0f;
     public LayerMask groundLayer;
-    
+
     private XRRig rig;
     private Vector2 inputAxis;
     private Vector3 upAxis;

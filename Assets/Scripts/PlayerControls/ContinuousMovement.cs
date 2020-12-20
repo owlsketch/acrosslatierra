@@ -17,7 +17,8 @@ public class ContinuousMovement : MonoBehaviour
     private float fallingSpeed;
     private CharacterController character;
     private XRRig rig;
-    
+    private bool movementAllowed = true;
+
 
     void Start()
     {
@@ -29,7 +30,9 @@ public class ContinuousMovement : MonoBehaviour
     {
         InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
         device.TryGetFeatureValue(CommonUsages.primary2DAxis, out inputAxis);
-    }
+    } 
+
+    public void AllowMovement(bool state) => movementAllowed = state;
 
     private void FixedUpdate()
     {
@@ -38,7 +41,10 @@ public class ContinuousMovement : MonoBehaviour
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
 
-        character.Move(direction * Time.fixedDeltaTime * speed);
+        if (movementAllowed)
+        {
+            character.Move(direction * Time.fixedDeltaTime * speed);
+        }
 
         // v(t) = 0 if grounded, else v(t) = v0 + at.
         bool isGrounded = DetermineIfGrounded();

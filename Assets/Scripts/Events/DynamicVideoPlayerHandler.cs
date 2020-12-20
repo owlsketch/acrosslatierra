@@ -21,6 +21,8 @@ public class DynamicVideoPlayerHandler : MonoBehaviour
     public Camera overlayCamera;
     
     private Material defaultSkybox;
+    private Vector3 defaultOrientation;
+    private float angleOfRotation;
     private UnityEngine.Video.VideoPlayer videoPlayer;
     private Coroutine co;
 
@@ -54,12 +56,27 @@ public class DynamicVideoPlayerHandler : MonoBehaviour
             
             yield return new WaitForSeconds(delayTime); // wait a minimum of delayTime before displaying video
             while (!videoPlayer.isPrepared) { yield return null; } // if video still isn't ready, then continue waiting
+            
+            if (player.TryGetComponent<ContinuousMovement>(out ContinuousMovement defaultMovement))
+            {
+                defaultMovement.AllowMovement(false);
+            } else
+            {
+                player.GetComponent<CustomContinuousMovement>().AllowMovement(false);
+            }
 
-            player.GetComponent<CustomContinuousMovement>().AllowMovement(false); // disable player movement
             overlayCamera.enabled = false; // remove scene rendering camera
             
-            skyboxContainer.transform.Rotate(new Vector3(0, 0, 90), Space.Self);
-
+            Vector2 originalupAxis = (Vector2.zero - Vector2.down);
+            Vector2 newUpAxis = (Vector2.zero - new Vector2(player.transform.position.x, player.transform.position.y)).normalized;
+            angleOfRotation = Vector2.SignedAngle(originalupAxis, newUpAxis);
+            
+            skyboxContainer.transform.Rotate(new Vector3(0, 0, -angleOfRotation));
+            
+            // defaultOrientation = skyboxContainer.transform.up;
+            // skyboxContainer.transform.up = new Vector3(upAxis.x, upAxis.y, 0);
+            // skyboxContainer.transform.Rotate(-player.transform.eulerAngles);
+            
             // update the interactable's layer to be part of the body layer
             Transform interactable = gameObject.transform.parent.transform;
             foreach (Transform child in interactable) { child.gameObject.layer = 12; }
@@ -80,11 +97,21 @@ public class DynamicVideoPlayerHandler : MonoBehaviour
     IEnumerator StopVideoCoroutine(int delayTime)
     {
         yield return new WaitForSeconds(delayTime);
+
+        if (player.TryGetComponent<ContinuousMovement>(out ContinuousMovement defaultMovement))
+        {
+            defaultMovement.AllowMovement(true);
+        }
+        else
+        {
+            player.GetComponent<CustomContinuousMovement>().AllowMovement(true);
+        }
         
-        player.GetComponent<CustomContinuousMovement>().AllowMovement(true);
         overlayCamera.enabled = true;
         
-        skyboxContainer.transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+        skyboxContainer.transform.Rotate(new Vector3(0, 0, angleOfRotation));
+        // skyboxContainer.transform.up = defaultOrientation;
+        // skyboxContainer.transform.Rotate(player.transform.eulerAngles);
 
         Transform interactable = gameObject.transform.parent.transform;
         foreach (Transform child in interactable) { child.gameObject.layer = 11; }
