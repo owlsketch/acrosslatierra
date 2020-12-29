@@ -8355,7 +8355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb0c7c732d80ea42b264e0e04e17c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoClip: {fileID: 32900000, guid: cd92bf42a7e3144699080c91e8bcc974, type: 3}
+  videoClip: {fileID: 32900000, guid: 63f4940a64c494d3398332d759a264b6, type: 3}
   renderTexture: {fileID: 8400000, guid: 64152b180964d42b587aacbba88f3e9c, type: 2}
   videoMaterial: {fileID: 2100000, guid: cf81e69ed063b448fb182b4642aafe3a, type: 2}
   player: {fileID: 77475693}
