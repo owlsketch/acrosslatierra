@@ -16,7 +16,8 @@ public class ContinuousMovement : MonoBehaviour
     private Vector2 inputAxis;
     private float fallingSpeed;
     private CharacterController character;
-    private XRRig rig;
+    private XRRig rig; 
+    private AudioSource footsteps;
     private bool movementAllowed = true;
 
 
@@ -24,6 +25,7 @@ public class ContinuousMovement : MonoBehaviour
     {
         character = GetComponent<CharacterController>();
         rig = GetComponent<XRRig>();
+        footsteps = GetComponent<AudioSource>();
     }
     
     void Update()
@@ -43,11 +45,29 @@ public class ContinuousMovement : MonoBehaviour
 
         if (movementAllowed)
         {
-            character.Move(direction * Time.fixedDeltaTime * speed);
+            if (Mathf.Abs(inputAxis.x) > 0.001 || Mathf.Abs(inputAxis.y) > 0.001)
+            {
+                if (fallingSpeed > -1)
+                {
+                    if (!footsteps.isPlaying) footsteps.Play();
+                } else
+                {
+                    if (footsteps.isPlaying) footsteps.Stop();
+                }
+                
+                character.Move(direction * Time.fixedDeltaTime * speed);
+            } else
+            {
+                if (footsteps.isPlaying) footsteps.Stop();
+            }
+        } else
+        {
+            if (footsteps.isPlaying) footsteps.Stop();
         }
 
-        // v(t) = 0 if grounded, else v(t) = v0 + at.
+
         bool isGrounded = DetermineIfGrounded();
+        // v(t) = 0 if grounded, else v(t) = v0 + at.
         if (isGrounded)
             fallingSpeed = 0;
         else 

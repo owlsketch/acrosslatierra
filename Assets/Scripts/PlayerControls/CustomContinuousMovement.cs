@@ -16,12 +16,14 @@ public class CustomContinuousMovement : MonoBehaviour
     private Vector2 inputAxis;
     private Vector3 upAxis;
     private float fallingSpeed;
+    private AudioSource footsteps;
     private bool movementAllowed = true;
 
 
     void Start()
     {
         rig = GetComponent<XRRig>();
+        footsteps = GetComponent<AudioSource>();
 
         // Vector *pointing* towards origin. We remove the z axis because we
         // don't want to be pushed from the origin in the z axis, only in x/y.
@@ -50,11 +52,30 @@ public class CustomContinuousMovement : MonoBehaviour
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
         if (movementAllowed)
         {
-            transform.Translate(direction * Time.fixedDeltaTime * speed);
+            if (Mathf.Abs(inputAxis.x) > 0.001 || Mathf.Abs(inputAxis.y) > 0.001)
+            {
+                if (fallingSpeed > -1)
+                {
+                    if (!footsteps.isPlaying) footsteps.Play();
+                } else
+                {
+                    if (footsteps.isPlaying) footsteps.Stop();
+                }
+                
+                transform.Translate(direction * Time.fixedDeltaTime * speed);
+            }
+            else
+            {
+                if (footsteps.isPlaying) footsteps.Stop();
+            }
+        }
+        else
+        {
+            if (footsteps.isPlaying) footsteps.Stop();
         }
 
-        // v(t) = 0 if grounded, else v(t) = v0 + at.
         bool isGrounded = DetermineIfGrounded();
+        // v(t) = 0 if grounded, else v(t) = v0 + at.
         if (isGrounded)
             fallingSpeed = 0;
         else

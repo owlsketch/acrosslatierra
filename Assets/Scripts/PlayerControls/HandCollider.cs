@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// When the two hands rub together, the sparks particle system is triggered!
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,5 +35,6 @@ public class HandCollider : MonoBehaviour
 
         count = 0;
         coroutineRunning = false;
+        if (spawnedSparks) Destroy(spawnedSparks);
     }
 }

@@ -18,7 +18,9 @@ public class DynamicVideoPlayerHandler : MonoBehaviour
     [Tooltip("The container of the skybox camera, which will be rotated accordingly when displaying 360 videos.")]
     public GameObject skyboxContainer;
     [Tooltip("The camera that renders the scene, which will be hidden when displaying 360 videos.")]
+    public bool rotateSkybox = true;
     public Camera overlayCamera;
+    public Camera transitiveCamera;
     
     private Material defaultSkybox;
     private Vector3 defaultOrientation;
@@ -66,17 +68,22 @@ public class DynamicVideoPlayerHandler : MonoBehaviour
             }
 
             overlayCamera.enabled = false; // remove scene rendering camera
-            
-            Vector2 originalupAxis = (Vector2.zero - Vector2.down);
-            Vector2 newUpAxis = (Vector2.zero - new Vector2(player.transform.position.x, player.transform.position.y)).normalized;
-            angleOfRotation = Vector2.SignedAngle(originalupAxis, newUpAxis);
-            
-            skyboxContainer.transform.Rotate(new Vector3(0, 0, -angleOfRotation));
-            
-            // defaultOrientation = skyboxContainer.transform.up;
-            // skyboxContainer.transform.up = new Vector3(upAxis.x, upAxis.y, 0);
-            // skyboxContainer.transform.Rotate(-player.transform.eulerAngles);
-            
+
+            if (rotateSkybox)
+            {
+                Vector2 originalupAxis = (Vector2.zero - Vector2.down);
+                Vector2 newUpAxis = (Vector2.zero - new Vector2(player.transform.position.x, player.transform.position.y)).normalized;
+                angleOfRotation = Vector2.SignedAngle(originalupAxis, newUpAxis);
+
+                skyboxContainer.transform.Rotate(new Vector3(0, 0, -angleOfRotation));
+
+                // Failed attempts:
+                // defaultOrientation = skyboxContainer.transform.up;
+                // skyboxContainer.transform.up = new Vector3(upAxis.x, upAxis.y, 0);
+                // skyboxContainer.transform.Rotate(-player.transform.eulerAngles);
+            }
+
+
             // update the interactable's layer to be part of the body layer
             Transform interactable = gameObject.transform.parent.transform;
             foreach (Transform child in interactable) { child.gameObject.layer = 12; }
@@ -109,9 +116,14 @@ public class DynamicVideoPlayerHandler : MonoBehaviour
         
         overlayCamera.enabled = true;
         
-        skyboxContainer.transform.Rotate(new Vector3(0, 0, angleOfRotation));
-        // skyboxContainer.transform.up = defaultOrientation;
-        // skyboxContainer.transform.Rotate(player.transform.eulerAngles);
+        if (rotateSkybox)
+        {
+            skyboxContainer.transform.Rotate(new Vector3(0, 0, angleOfRotation));
+
+            // Failed attempts:
+            // skyboxContainer.transform.up = defaultOrientation;
+            // skyboxContainer.transform.Rotate(player.transform.eulerAngles);
+        }
 
         Transform interactable = gameObject.transform.parent.transform;
         foreach (Transform child in interactable) { child.gameObject.layer = 11; }
